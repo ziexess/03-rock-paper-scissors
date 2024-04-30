@@ -1,0 +1,52 @@
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:50px;
+}
+
+.buttons button{
+    font-size: 70px;
+    border-radius: 10px;
+    border: solid 4px #0c0e13;
+    background-color:#296d71;
+    color: white;
+    transition: background-color 0.3s ease;
+    font-family: "Jersey 15", sans-serif;
+}
+button:hover {
+    background-color: #1e363b;
+}
+
+.result {
+    display: flex;
+    justify-content: center;
+}
+
+#display {
+    font-family: "Jersey 15", sans-serif;
+    font-size: 75px;
+
+}
+
+.score {
+    display: flex;
+    justify-content: center;
+}
+
+#score {
+    font-family: "Jersey 15", sans-serif;
+    font-size: 75px;
+
+}
+
+.finalResult {
+    display: flex;
+    justify-content: center;
+}
+
+#finalResult {
+    font-family: "Jersey 15", sans-serif;
+    font-size: 75px;
+    
+}
