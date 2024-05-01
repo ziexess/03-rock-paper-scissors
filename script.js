@@ -1,10 +1,6 @@
 function getComputerChoice() {
-    let randomNumber = Math.floor(Math.random() * 100);
-    let randomPick;
-    if (randomNumber < 33 && randomNumber >= 0) {randomPick = 'rock'}
-    else if (randomNumber < 66 && randomNumber >= 33) {randomPick = 'paper'}
-    else if (randomNumber <= 99 && randomNumber >= 66) {randomPick = 'scissors'}
-    return randomPick;
+    let randomNumber = Math.floor(Math.random() * 3);
+    return randomNumber;
 }
     const rockButton = document.querySelector(".rock");
     const paperButton = document.querySelector(".paper");
@@ -23,43 +19,52 @@ function playGame() {
 
     rockButton.addEventListener("click", () => {
         computerChoice = getComputerChoice();
-        playRound('rock', computerChoice);});
+        playRound(0, computerChoice);});
     paperButton.addEventListener("click", () => {
         computerChoice = getComputerChoice();
-        playRound('paper', computerChoice);});
+        playRound(1, computerChoice);});
     scissorsButton.addEventListener("click", () => {
         computerChoice = getComputerChoice();
-        playRound('scissors', computerChoice);});
+        playRound(2, computerChoice);});
 
         
     function playRound(humanChoice, computerChoice) {
+        let userPick;
+        let computerPick
+        switch (humanChoice) {
+            case 0:
+                userPick = 'ROCK';
+                break;
+            case 1:
+                userPick = 'PAPER';
+                break;
+            case 2:
+                userPick = 'SCISSORS';
+                break;
+        }
+        switch (computerChoice) {
+            case 0:
+                computerPick = 'ROCK';
+                break;
+            case 1:
+                computerPick = 'PAPER';
+                break;
+            case 2:
+                computerPick = 'SCISSORS';
+                break;
+        }
         if (checkResult() !== 5) {
-            if (humanChoice == 'rock' && computerChoice == 'paper') {
-                computerScore += 1;
-                result.textContent = "Loser! " + computerChoice + " beats " + humanChoice;
-            }
-            else if (humanChoice == 'rock' && computerChoice == 'scissors') {
+            if ((humanChoice - computerChoice) + 3 % 3 === 1) {
                 playerScore += 1;
-                result.textContent = "Winner! " + humanChoice + " beats " + computerChoice;
+                result.textContent = "Winner! " + userPick + " beats " + computerPick;
             }
-            else if (humanChoice == 'paper' && computerChoice == 'scissors') {
+            else if ((humanChoice - computerChoice) + 3 % 3 !== 1) {
+                if (humanChoice === computerChoice) {
+                    result.textContent = "It's a Tie! Try AGAIN.";
+                    return;
+                }
                 computerScore += 1;
-                result.textContent = "Loser! " + computerChoice + " beats " + humanChoice;
-            }
-            else if (humanChoice == 'paper' && computerChoice == 'rock') {
-                playerScore += 1;
-                result.textContent = "Winner! " + humanChoice + " beats " + computerChoice;
-            }
-            else if (humanChoice == 'scissors' && computerChoice == 'paper') {
-                playerScore += 1;
-                result.textContent = "Winner! " + humanChoice + " beats " + computerChoice;
-            }
-            else if (humanChoice == 'scissors' && computerChoice == 'rock') {
-                computerScore += 1;
-                result.textContent = "Loser! " + computerChoice + " beats " + humanChoice;
-            }
-            else if (humanChoice == computerChoice) {
-                result.textContent = "It's a Tie! Try AGAIN.";
+                result.textContent = "Loser! " + computerPick + " beats " + userPick;
             }
             score.textContent = `Your score: ` + playerScore +  ` Computer score: ` + computerScore;
             checkResult();
